@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const Routes = require('./routes/router')
 const mongoose = require('mongoose')
 const HttpError = require('./model/http-error')
+const PORT = process.env.PORT || 5000;
 require('dotenv').config();
 const app = express()
 app.use(bodyParser.json())
@@ -23,10 +24,10 @@ app.use((error,req,res,next)=>{
 })
 mongoose.connect(process.env.MONGO_URI).then(()=>{
     console.log("DATABASE CONNECTED")
-    app.listen(process.env.PORT || 5000, () => {
-        console.log(`Server is running `);
+    app.listen(PORT, () => {
+        console.log(`Server is running ${PORT} `);
     });
 }).catch(err=>{
      console.log(err)
-     console.log("*********************************************************")
+     console.log("********************************************************")
 })
